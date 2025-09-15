@@ -8,20 +8,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const prompt_service_1 = require("./core/prompt/prompt.service");
-const prompt = new prompt_service_1.PromptService();
-function run() {
-    return __awaiter(this, void 0, void 0, function* () {
-        const data = yield prompt.input('Число', 'number');
-        console.log(data);
-    });
+exports.PromptService = void 0;
+const inquirer_1 = __importDefault(require("inquirer"));
+class PromptService {
+    input(message, type) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { result } = yield inquirer_1.default.prompt([
+                {
+                    type: type,
+                    name: 'result',
+                    message: message,
+                },
+            ]);
+            return result;
+        });
+    }
 }
-run();
-// export class App {
-//   run() {
-//     console.log('done');
-//   }
-// }
-// const app = new App();
-// app.run();
+exports.PromptService = PromptService;
