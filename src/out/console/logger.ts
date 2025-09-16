@@ -1,6 +1,6 @@
-import { IStreamLogger } from '../../core/handlers/stream-logger.interface';
+import { ILogger } from './logger.interface';
 
-export class ConsoleLogger implements IStreamLogger {
+export class ConsoleLogger implements ILogger {
   private static instance: ConsoleLogger | undefined;
 
   private constructor() {}
@@ -14,12 +14,14 @@ export class ConsoleLogger implements IStreamLogger {
   }
 
   log(...args: any[]): void {
-    console.log(...args);
+    console.log('Вывод', ...args);
   }
+
   end(): void {
-    console.log('Готово');
+    console.log('Завершение процесса');
   }
+
   error(...args: any[]): void {
-    console.error(...args);
+    console.error('Ошибка: ', ...args);
   }
 }
